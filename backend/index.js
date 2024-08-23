@@ -4,6 +4,7 @@ import cors from "cors";
 
 import cookieParser from "cookie-parser";
 import ConnectDb from "./utils/Db.js";
+import Router from "./routes/UserRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -16,8 +17,9 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json()); //parses incoming requests with JSON payloads.makes it available on req.body
 
-const PORT = process.env.PORT || 3000
+app.use('/api/user',Router)
 
+const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
 ConnectDb();

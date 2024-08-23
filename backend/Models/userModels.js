@@ -1,48 +1,49 @@
 import mongoose from "mongoose";
-import { genSalt } from "bcrypt";
+import { genSalt, hash } from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
-    email:{
-        type: string,
-        required: [true, "Email is Required"],
+    email: {
+        type: String,
+        required: [true, "Email is required"],
         unique: true,
     },
-    password:{
-        type: string,
-        required: [true, "Password is Required"],
+    password: {
+        type: String,
+        required: [true, "Password is required"],
     },
-    firtsname:{
-        type: string,
+    firstName: { 
+        type: String,
         required: false,
     },
-    lastname:{
-        type: string,
+    lastName: {
+        type: String,
         required: false,
     },
-    image:{
-        type: string,
-        required: false, 
+    image: {
+        type: String,
+        required: false,
     },
-    colors:{
+    colors: {
         type: Number,
-        required:false,
+        required: false,
     },
-    profilesetup:{
+    profileSetup: {
         type: Boolean,
-        required:false,
+        required: false,
     },
-})
-/*Pre-save Middleware Trigger: Before saving the document, the middleware is triggered.
-Salt Generation: A unique salt is generated.
-Password Hashing: The plaintext password is hashed using the generated salt.
-Save Operation Continues: The next() function is called to proceed with saving the hashed password to the database.*/
+});
 
-UserSchema.pre("save",async function(next){
-    const salt = await genSalt();
-    this.password = await hash(this.password,salt);
+// Pre-save middleware for password hashing
+UserSchema.pre("save", async function (next) {
+    if (this.isModified("password")) { // Only hash if password has been modified or is new
+        try {
+            const salt = await genSalt();
+            this.password = await hash(this.password, salt);
+        } catch (error) {
+            return next(error); // Pass error to the next middleware
+        }
+    }
     next();
-}) ;
+});
 
-
-export const User = mongoose.model("users",UserSchema);
-      
+export const User = mongoose.model("User", UserSchema); // Named export
