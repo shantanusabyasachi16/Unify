@@ -16,12 +16,16 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import axios from 'axios';
+import { USER_API_END_POINT } from '@/Utils/Endpoints';
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+
+  
   // for login
   const loginHandler = async () => {
     // handle login
@@ -29,6 +33,10 @@ const Auth = () => {
 
   // for sign up
   const signupHandler = async () => {
+    const response = await axios.post(`${USER_API_END_POINT}/signup`, {email,password })
+    
+    console.log(response);
+    
     // handle sign up
   };
 
