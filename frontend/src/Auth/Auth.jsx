@@ -27,39 +27,33 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const validateUser = () => {
-    if (!email.length) {
-      toast.error("Email is required");
-      return false;
-    }
-    if (!password.length) {
-      toast.error("Password is required");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      toast.error("Password and Confirm Password should be the same.");
-      return false;
-    }
-    return true;
-  };
+ 
 
   // for login
   const loginHandler = async () => {
-    // handle login
+    try {
+      const response = await axios.post(`${USER_API_END_POINT}/login`, { email, password },{withCredentials:true});
+      console.log(response);
+      toast.success("loginsuccessful");
+    } catch (error) {
+      toast.error("login failed. Please try again.");
+      console.error("login error:", error);
+    }
   };
 
   // for sign up
   const signupHandler = async () => {
-    if (validateUser()) {
+
+   
       try {
-        const response = await axios.post(`${USER_API_END_POINT}/signup`, { email, password });
+        const response = await axios.post(`${USER_API_END_POINT}/signup`, { email, password },{withCredentials:true});
         console.log(response);
         toast.success("Sign up successful");
       } catch (error) {
         toast.error("Sign up failed. Please try again.");
         console.error("Sign up error:", error);
       }
-    }
+    
   };
 
   return (
