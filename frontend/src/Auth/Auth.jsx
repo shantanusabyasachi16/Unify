@@ -18,14 +18,31 @@ import {
 } from "@/components/ui/tabs";
 import axios from 'axios';
 import { USER_API_END_POINT } from '@/Utils/Endpoints';
+import { toast } from 'sonner';
+
+
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const validateUser = () => {
+    if (!email.length) {
+      toast.error("Email is required");
+      return false;
+    }
+    if (!password.length) {
+      toast.error("Password is required");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Password and Confirm Password should be the same.");
+      return false;
+    }
+    return true;
+  };
 
-  
   // for login
   const loginHandler = async () => {
     // handle login
@@ -33,11 +50,16 @@ const Auth = () => {
 
   // for sign up
   const signupHandler = async () => {
-    const response = await axios.post(`${USER_API_END_POINT}/signup`, {email,password })
-    
-    console.log(response);
-    
-    // handle sign up
+    if (validateUser()) {
+      try {
+        const response = await axios.post(`${USER_API_END_POINT}/signup`, { email, password });
+        console.log(response);
+        toast.success("Sign up successful");
+      } catch (error) {
+        toast.error("Sign up failed. Please try again.");
+        console.error("Sign up error:", error);
+      }
+    }
   };
 
   return (
@@ -133,6 +155,6 @@ const Auth = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Auth;
