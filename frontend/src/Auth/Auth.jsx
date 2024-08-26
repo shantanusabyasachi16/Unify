@@ -19,10 +19,12 @@ import {
 import axios from 'axios';
 import { USER_API_END_POINT } from '@/Utils/Endpoints';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Auth = () => {
+  const  navigate= useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,11 +35,15 @@ const Auth = () => {
   const loginHandler = async () => {
     try {
       const response = await axios.post(`${USER_API_END_POINT}/login`, { email, password },{withCredentials:true});
-      console.log(response);
-      toast.success("loginsuccessful");
+      
+    if (response.data.user._id) {
+      if (response.data.user.profileSetup) navigate("/chat") 
+        else navigate("/profile")
+    }    
+    console.log(response);
     } catch (error) {
-      toast.error("login failed. Please try again.");
-      console.error("login error:", error);
+console.log(error);
+
     }
   };
 
@@ -48,10 +54,14 @@ const Auth = () => {
       try {
         const response = await axios.post(`${USER_API_END_POINT}/signup`, { email, password },{withCredentials:true});
         console.log(response);
-        toast.success("Sign up successful");
+        if (response.data.success) {
+          navigate("/profile")
+          toast.success(response.data.message)
+        }
+    
+        
       } catch (error) {
-        toast.error("Sign up failed. Please try again.");
-        console.error("Sign up error:", error);
+        toast.error(error.response.data.message)
       }
     
   };

@@ -44,52 +44,60 @@ export const Signup = async (request, response, next) => {
 export const login = async (request, response, next) => {
     try {
         const { email, password } = request.body;
+
         if (!email || !password) {
             return response.status(400).json({
                 message: "Email and Password are Required",
                 success: false
             });
         }
-        // Create a new user
-        const user = await User.findOne({ email});
+
+        // Find the user by email
+        const user = await User.findOne({ email });
 
         if (!user) {
             return response.status(404).json({
-                message: "user not found",
+                message: "User not found",
                 success: false
             });
         }
 
+        // Compare the provided password with the hashed password in the database
         const auth = await bcrypt.compare(password, user.password);
 
         if (!auth) {
             return response.status(400).json({
-                message: "password is incorrect",
+                message: "Password is incorrect",
                 success: false
             });
         }
-        
-       
+
+        // Create and set the authentication token in a cookie
         response.cookie("token", createToken(email, user._id), {
-            maxAge,
+            maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
             secure: true, 
-            sameSite: "none" 
+            sameSite: "none"
         });
 
-        // Return response with user details
+        // Return the user details along with a success message
         return response.status(200).json({
+            success: true,
             user: {
-                Id: user._id,
+                _id: user._id,  // Use standard MongoDB field name
                 email: user.email,
                 profileSetup: user.profileSetup,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 image: user.image,
-                colors:user.colors
-            }
+                colors: user.colors
+            },
+            message: "Login successful"
         });
     } catch (error) {
         console.log(error);
-        response.status(500).json({ message: "Server error", success: false });
+        return response.status(500).json({ 
+            message: "Server error", 
+            success: false 
+        });
     }
 };
