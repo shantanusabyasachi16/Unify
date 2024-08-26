@@ -74,16 +74,16 @@ export const login = async (request, response, next) => {
 
         // Create and set the authentication token in a cookie
         response.cookie("token", createToken(email, user._id), {
-            maxAge: 24 * 60 * 60 * 1000, // Example: 1 day in milliseconds
+            maxAge: 24 * 60 * 60 * 1000, 
             secure: true, 
             sameSite: "none"
         });
 
-        // Return the user details along with a success message
+       
         return response.status(200).json({
             success: true,
             user: {
-                _id: user._id,  // Use standard MongoDB field name
+                _id: user._id, 
                 email: user.email,
                 profileSetup: user.profileSetup,
                 firstName: user.firstName,
