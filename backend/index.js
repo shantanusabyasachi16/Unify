@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import ConnectDb from "./utils/Db.js";
 import userRouter from "./routes/UserRoutes.js";
+import messageRoutes from "./routes/messageroutes.js"
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json()); //parses incoming requests with JSON payloads.makes it 
 app.use(cookieParser());
 
 app.use('/api/user',userRouter)
+app.use('/api/message',messageRoutes)
 
 const PORT = process.env.PORT || 3000
 
