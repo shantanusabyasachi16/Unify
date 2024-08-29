@@ -1,49 +1,30 @@
 import mongoose from "mongoose";
-import { genSalt, hash } from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
-    email: {
+   fullName: {
         type: String,
-        required: [true, "Email is required"],
-        unique: true,
+        required: true,
+    },
+   username: {
+        type: String,
+        required: true,
+        unique:true
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: true,
     },
-    firstName: { 
+   profilePhoto: { 
         type: String,
-        required: false,
+        default: ""
     },
-    lastName: {
+   gender: {
         type: String,
-        required: false,
+        enum:["male","female"],
+        required:true
     },
-    image: {
-        type: String,
-        required: false,
-    },
-    colors: {
-        type: Number,
-        required: false,
-    },
-    profileSetup: {
-        type: Boolean,
-        required: false,
-    },
-});
+    
+},{timestamps:true});
 
-// Pre-save middleware for password hashing
-UserSchema.pre("save", async function (next) {
-    if (this.isModified("password")) { // Only hash if password has been modified or is new
-        try {
-            const salt = await genSalt();
-            this.password = await hash(this.password, salt);
-        } catch (error) {
-            return next(error); // Pass error to the next middleware
-        }
-    }
-    next();
-});
 
 export const User = mongoose.model("User", UserSchema); // Named export
