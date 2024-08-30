@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { USER_API } from "@/utils/constant";
+import axios from "axios";
 const Login = () => {
   const[ user, setuser] = useState({
     username:"",
-    password:"",
-   
+    password:""  
   })
- const SigninHandler= (e)=>{
-e.preventDefault();
-console.log(user);
+  const navigate = useNavigate();
+ const SigninHandler= async (e)=>{
+  e.preventDefault();
+  try {
+    const res = await axios.post(`${USER_API}/login`, user, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
+
+      navigate("/")
+      console.log(res);
+      
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+
 setuser({
   username:"",
   password:"",

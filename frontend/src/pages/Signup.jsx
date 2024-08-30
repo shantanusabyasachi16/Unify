@@ -3,9 +3,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { USER_API } from "@/utils/constant";
+import { toast } from "sonner";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -15,7 +16,7 @@ const Signup = () => {
     confirmPassword: "",
     gender: "",
   });
-
+  const navigate = useNavigate();
   const SignupHandler = async (e) => {
     e.preventDefault();
     try {
@@ -23,9 +24,13 @@ const Signup = () => {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
-      console.log(res);
+      if (res.data.success) {
+        navigate("/login")
+        toast.success(res.data.message)
+    
+      }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message)
     }
 
     setUser({
