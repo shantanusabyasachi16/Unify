@@ -9,16 +9,16 @@ import messageRoutes from "./routes/messageroutes.js"
 dotenv.config();
 const app = express();
 
-app.use(cors({
-    origin:[process.env.ORIGIN],
-    methods:["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials:true,
-}))
-
-
+app.use(express.urlencoded({extended:true}));
 app.use(express.json()); //parses incoming requests with JSON payloads.makes it available on req.body
 app.use(cookieParser());
 
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+  
 app.use('/api/user',userRouter)
 app.use('/api/message',messageRoutes)
 
