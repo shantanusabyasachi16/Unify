@@ -1,7 +1,8 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Signup from "./pages/Signup";
-import Login from "./pages/login";
-import Home from "./pages/Home";
+import Signup from "./auth/Signup";
+import Login from "./auth/login";
+import Home from "./chat/Home";
+
 
 
 

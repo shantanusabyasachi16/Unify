@@ -6,11 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { USER_API } from "@/utils/constant";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "@/redux/userSlice";
 const Login = () => {
   const[ user, setuser] = useState({
     username:"",
     password:""  
   })
+  const dispatch = useDispatch();
   const navigate = useNavigate();
  const SigninHandler= async (e)=>{
   e.preventDefault();
@@ -19,10 +22,8 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
-
       navigate("/")
-      console.log(res);
-      
+      dispatch(setUserInfo(res.data))
   } catch (error) {
     toast.error(error.response.data.message)
   }
