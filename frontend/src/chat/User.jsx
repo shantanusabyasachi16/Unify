@@ -1,10 +1,9 @@
-import React from 'react'
-import SendInput from './SendInput'
+import React from 'react';
 
-const Message = () => {
+const User = () => {
   return (
-    <div className='md:min-w-[550px] flex flex-col'>
-        <div className="flex gap-2  items-center bg-zinc-800 text-white px-4 py-2 mb-2">
+    <>
+      <div className="flex gap-2 hover:text-black items-center hover:bg-zinc-200 rounded p-2 cursor-pointer">
         <div className="avatar online">
           <div className='w-12 h-12 rounded-full overflow-hidden'>
             <img 
@@ -20,9 +19,9 @@ const Message = () => {
           </div>
         </div>
       </div>
-     <SendInput/>
-    </div>
-  )
+      <div className='my-0 py-0 h-1'></div>
+    </>
+  );
 }
 
-export default Message
+export default User;

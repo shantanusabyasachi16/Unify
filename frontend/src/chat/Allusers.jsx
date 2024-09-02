@@ -1,9 +1,32 @@
-import React from 'react'
+import React from "react";
+import User from "./User";
 
 const Allusers = () => {
-  return (
-    <div>Allusers</div>
-  )
-}
+ 
 
-export default Allusers
+  return (
+    <div className=" max-h-96 overflow-auto">
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+     <User/>
+    </div>
+  );
+};
+
+export default Allusers;
