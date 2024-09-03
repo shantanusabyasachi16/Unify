@@ -2,8 +2,23 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import Allusers from "./Allusers";
+import axios from "axios";
+import { USER_API } from "@/utils/constant";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const SidePanel = () => {
+  const navigate = useNavigate();
+  const logouthandler =  async()=>{
+  try {
+    const res =  await axios.get(`${USER_API}/logout`)
+    toast.success(res.data.message)
+    navigate("/login")
+  } catch (error) {
+   console.log(error);
+    
+  }  
+  }
   return (
     <div className="p-4 sm:p-6 md:p-8 bg-gray-800 text-white h-full">
       <form action="" className="flex items-center gap-2 mb-4">
@@ -20,7 +35,7 @@ const SidePanel = () => {
       <div className="mt-4 space-y-4">
         <Allusers />
         <div className="pt-4 border-t border-gray-700">
-          <Button className="w-full bg-red-600">Logout</Button>
+          <Button onClick={logouthandler} className="w-full bg-red-600">Logout</Button>
         </div>
       </div>
     </div>

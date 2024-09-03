@@ -22,6 +22,7 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
+    toast.success(res.data.message)
       navigate("/")
       dispatch(setUserInfo(res.data))
   } catch (error) {

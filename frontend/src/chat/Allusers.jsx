@@ -9,7 +9,7 @@ const Allusers = () => {
   if (!otherUsers) return null;
 
   return (
-    <div className="max-h-96 overflow-auto">
+    <div className="max-h-96 overflow-auto flex-1">
       {otherUsers?.map((user) => {
         return (
           <User key={user._id} user={user} />
