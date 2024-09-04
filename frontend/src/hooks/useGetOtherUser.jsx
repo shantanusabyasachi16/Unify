@@ -12,7 +12,7 @@ const useGetOtherUser = () => {
       try {
         axios.defaults.withCredentials = true;
         const res = await axios.get(`${USER_API}/`);
-        console.log(res);
+      
         dispatch(setotherUsers(res.data));
       } catch (error) {
         console.log(error);
