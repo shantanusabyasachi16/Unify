@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { Chat } from '../models/chatModel.js'; 
+import { Message } from '../models/messageModel.js'; 
 
 export const sendMessage = async (req, res) => {
     try {
