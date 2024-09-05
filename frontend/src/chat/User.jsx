@@ -1,4 +1,4 @@
-import store from "@/redux/store";
+
 import { setselectedUsers } from "@/redux/userSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,13 +19,13 @@ const User = (props) => {
         className={`flex gap-2 items-center text-white hover:text-zinc-900 hover:bg-zinc-200 rounded p-2 cursor-pointer ${selectedUsers?._id === user?._id ? 'bg-zinc-200 text-black' : ''}`}
       >
         <div className="avatar online">
-          <div className="w-12 h-12 rounded-full overflow-hidden">
-            <img
-              src={user?.profilePhoto}
-              alt={`${user?.fullName}'s avatar`}
-              className="w-full h-full object-cover"
-            />
-          </div>
+        <div className="w-12 h-12 rounded-full overflow-hidden">
+    <img
+      src={user?.profilePhoto}
+      alt={`${user?.fullName}'s avatar`}
+      className="w-full h-full object-cover"
+    />
+  </div>
         </div>
         <div className="flex flex-col flex-1">
           <div className="flex justify-between gap-2">
