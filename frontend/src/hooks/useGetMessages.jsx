@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-const useGetMessages =() => {
+const useGetMessages = () => {
     const  {selectedUsers} = useSelector(store=>store.user)
  const dispatch = useDispatch();
     useEffect(()=>{
