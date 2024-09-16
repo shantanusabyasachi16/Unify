@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { MESSAGE_API } from "@/utils/constant";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMessages } from "@/redux/Messageslice";
 
 const SendInput = () => {
-  const [input, setInput] = useState(''); // Initialize as an empty string
+  const [input, setInput] = useState(''); 
+  const dispatch = useDispatch();
   const { selectedUsers } = useSelector(store => store.user);
+  const {messages} = useSelector(store=>store.message)
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -16,12 +19,14 @@ const SendInput = () => {
             headers: {
                 "Content-Type": 'application/json'
             },
-            withCredentials: true // Ensure this is set if using credentials
+            withCredentials: true 
         });
         console.log(res);
+        dispatch(setMessages([...messages,res?.data?.newMessage]))
     } catch (error) {
         console.error(error);
     }
+    setInput('');
 };
 
   return (
