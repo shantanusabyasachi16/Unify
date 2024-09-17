@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import Allusers from "./Allusers";
@@ -6,8 +6,14 @@ import axios from "axios";
 import { USER_API } from "@/utils/constant";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setotherUsers } from "@/redux/userSlice";
+import { es2015 } from "globals";
 
 const SidePanel = () => {
+  const {otherUsers} = useSelector(store=>store.user)
+  const dispatch = useDispatch();
+  const [find,setfind]= useState("")
   const navigate = useNavigate();
   const logouthandler =  async()=>{
   try {
@@ -19,11 +25,23 @@ const SidePanel = () => {
     
   }  
   }
+  const searchHandler = ()=>{
+   e.preventDefault();
+  const searchuser =  otherUsers?.find((user)=>user.fullname.tolowerCase().includes(find.tolowerCase()))
+if (searchuser) {
+  dispatch(setotherUsers(searchuser))
+}
+else{
+  toast.error("user not found")
+}
+}
   return (
     <div className="p-4 sm:p-6 md:p-8 bg-gray-800 text-white h-full">
-      <form action="" className="flex items-center gap-2 mb-4">
+      <form onSubmit={searchHandler} action="" className="flex items-center gap-2 mb-4">
         <input
-          className="input input-bordered rounded-md flex-grow h-10 px-4 text-gray-800"
+        value={find}
+        onChange={(e)=>setfind(e.target.value)}
+          className="input input-bordered rounded-md flex-grow h-10 px-4 text-white"
           type="text"
           placeholder="Search..."
         />

@@ -33,10 +33,11 @@ return()=> dispatch(setselectedUsers(null));
       <SendInput />
     </div>
       ):(
-        <div className='flex flex-col justify-center items-center'>
-          <h1>Hi,{userInfo.fullName}</h1>
-          <h1 className='text-2xl'>let start a conversation </h1>
-        </div>
+        <div className='flex flex-col justify-center items-center h-full'>
+        <h1 className='text-4xl font-bold'>Hi, {userInfo?.fullName }</h1>
+        <h1 className='text-2xl'>Let's start a conversation</h1>
+      </div>
+      
         
       )
     }
