@@ -29,13 +29,13 @@ function App() {
   //user is authenticated or not
   const {userInfo} = useSelector(store=>store.user)
 
-  useEffect(()=>{
-    if (userInfo) {
-      const socket = io("http://localhost:8000",{
-      })
-      setsocket(socket)
-    }
-  },[userInfo])
+useEffect(() => {
+  if (userInfo) {
+    const socket = io("http://localhost:8000", {  
+    });
+    setsocket(socket);
+  }
+}, [userInfo]);
   return (
   <div>
      <RouterProvider router={router} />
