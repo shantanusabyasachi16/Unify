@@ -10,6 +10,7 @@ const useGetSocketMessage = () => {
  socket?.on("newMessages",(newMessage)=>{
 dispatch(setMessages([...messages,newMessage]))
  })
+ return ()=> socket?.off("newMessages")
   },[socket,setMessages,messages])
 }
 

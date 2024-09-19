@@ -4,35 +4,40 @@ import express from "express";
 
 const app = express();
 
-// to create the socket server
-
+// Create the socket server
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173"], // Allow frontend access
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
+const userSocket = {}; // Store userId -> socketId mappings
+
+// Function to get receiver's socket ID
 export const getReceiverSocketId = (receiverId) => {
   return userSocket[receiverId];
 };
-const userSocket = {}; //userid == socket id
-//to start the socket
-io.on("connection", (socket) => {
-  console.log("user connected", socket.id);
 
-  const userId = socket.handshake.query.userId;
-  if (userId != undefined) {
-    userSocket[userId] = socket.id;
+// Start the socket connection
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
+
+  const userId = socket.handshake.query.userId; // Get userId from query parameters
+  if (userId) {
+    userSocket[userId] = socket.id; // Map userId to socketId
+    io.emit("getOnlineUsers", Object.keys(userSocket)); // Notify all clients of online users
   }
 
-  io.emit("getOnlineUsers", Object.keys(userSocket));
-
   socket.on("disconnect", () => {
-    console.log("user disconnected", socket.id);
-    delete userSocket[userId];
-    io.emit("getOnlineUsers", Object.keys(userSocket));
+    console.log("User disconnected:", socket.id);
+
+    if (userId && userSocket[userId]) {
+      delete userSocket[userId]; // Clean up user from userSocket
+      io.emit("getOnlineUsers", Object.keys(userSocket)); // Update online users
+    }
   });
 });
 
