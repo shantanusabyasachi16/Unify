@@ -7,9 +7,9 @@ import { setselectedUsers } from '@/redux/userSlice';
 const Message = () => {
   const {selectedUsers,userInfo} = useSelector(store=>store.user)
   const dispatch = useDispatch();
-  useEffect(()=>{
-return()=> dispatch(setselectedUsers(null));
-  },[])
+//   useEffect(()=>{
+// return()=> dispatch(setselectedUsers(null));
+//   },[])
   return (
     <>
     {
