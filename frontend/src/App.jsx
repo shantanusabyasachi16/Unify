@@ -3,8 +3,10 @@ import Signup from "./auth/Signup";
 import Login from "./auth/login";
 import Home from "./chat/Home";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import { setsocket } from "./redux/socketSlice";
+import { setonlineUsers } from "./redux/userSlice";
 
 
 
@@ -25,15 +27,22 @@ const router = createBrowserRouter([
 
 ])
 function App() {
-  const [socket, setsocket] = useState(null)
+ 
   //user is authenticated or not
   const {userInfo} = useSelector(store=>store.user)
+  const dispatch = useDispatch();
 
 useEffect(() => {
   if (userInfo) {
     const socket = io("http://localhost:8000", {  
+      query:{
+        userId:userInfo._id
+      }
     });
-    setsocket(socket);
+     dispatch(setsocket(socket));
+     socket.on('getOnlineUsers',(onlineUsers)=>{
+dispatch(setonlineUsers(onlineUsers))
+     })
   }
 }, [userInfo]);
   return (
