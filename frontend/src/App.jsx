@@ -30,6 +30,7 @@ function App() {
  
   //user is authenticated or not
   const {userInfo} = useSelector(store=>store.user)
+  const {socket}= useSelector(store=>store.socket)
   const dispatch = useDispatch();
 
 useEffect(() => {
@@ -43,7 +44,14 @@ useEffect(() => {
      socket.on('getOnlineUsers',(onlineUsers)=>{
 dispatch(setonlineUsers(onlineUsers))
      })
+     return ()=> socket.close();
+  }else{
+    if (socket) {
+      socket.close();
+      dispatch(setsocket(null))
+    }
   }
+  
 }, [userInfo]);
   return (
   <div>

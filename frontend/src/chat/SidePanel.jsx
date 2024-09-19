@@ -7,7 +7,7 @@ import { USER_API } from "@/utils/constant";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setotherUsers } from "@/redux/userSlice";
+import { setotherUsers, setUserInfo } from "@/redux/userSlice";
 
 const SidePanel = () => {
   const { otherUsers } = useSelector((store) => store.user);
@@ -20,6 +20,7 @@ const SidePanel = () => {
       const res = await axios.get(`${USER_API}/logout`);
       toast.success(res.data.message);
       navigate("/login");
+      dispatch(setUserInfo(null))
     } catch (error) {
       console.log(error);
     }
