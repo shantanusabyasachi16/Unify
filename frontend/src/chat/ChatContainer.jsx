@@ -2,9 +2,12 @@ import React from "react";
 import Singlemessage from "./Singlemessage";
 import useGetMessages from "@/hooks/useGetMessages";
 import { useSelector } from "react-redux";
+import useGetSocketMessage from "@/hooks/useGetSocketMessage";
 
 const ChatContainer = () => {
   useGetMessages();
+  useGetSocketMessage();
+  
   const { messages } = useSelector((store) => store.message);
   if (!messages) return;
   return (

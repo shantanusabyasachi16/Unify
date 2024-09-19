@@ -8,7 +8,7 @@ const User = (props) => {
   const { selectedUsers, onlineUsers } = useSelector(store => store.user);
 
   // Convert IDs to strings for proper comparison
-  const online = onlineUsers.includes(user._id.toString());
+  const online = onlineUsers?.includes(user._id.toString());
 
   const UserHandler = () => {
     dispatch(setselectedUsers(user));
