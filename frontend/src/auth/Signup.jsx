@@ -162,7 +162,7 @@ const Signup = () => {
             </div>
   
           </form>
-          <span className="text-sm text-white block text-center mt-2 ">
+          <span className="text-lg text-white block text-center mt-4">
           Already have an account?
             <Link to="/login" className="font-medium text-blue-400 hover:text-blue-500 ml-2">
               Login
