@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { LogOut, Search } from "lucide-react";
 import Allusers from "./Allusers";
 import axios from "axios";
 import { USER_API } from "@/utils/constant";
@@ -20,7 +20,7 @@ const SidePanel = () => {
       const res = await axios.get(`${USER_API}/logout`);
       toast.success(res.data.message);
       navigate("/login");
-      dispatch(setUserInfo(null))
+      dispatch(setUserInfo(null));
     } catch (error) {
       console.log(error);
     }
@@ -39,27 +39,35 @@ const SidePanel = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-gray-800 text-white h-full">
-      <form onSubmit={searchHandler} className="flex items-center gap-2 mb-4">
-        <input
-          value={find}
-          onChange={(e) => setFind(e.target.value)}
-          className="input input-bordered rounded-md flex-grow h-10 px-4 text-white"
-          type="text"
-          placeholder="Search..."
-        />
-        <Button type="submit" className="p-2 bg-gray-700">
-          <Search className="h-5 w-5 text-white" />
-        </Button>
-      </form>
-
-      <div className="mt-4 space-y-4">
-        <Allusers />
-        <div className="pt-4 border-t border-gray-700">
-          <Button onClick={logouthandler} className="w-full bg-red-600">
-            Logout
+    <div className="p-4 sm:p-6 md:p-8 bg-[#040938] text-white h-full flex flex-col justify-between">
+     
+      <div>
+        {/* Search form */}
+        <form onSubmit={searchHandler} className="flex items-center gap-2 mb-4">
+          <input
+            value={find}
+            onChange={(e) => setFind(e.target.value)}
+            className="input input-bordered rounded-full flex-grow h-10 px-4 text-white bg-[#0f1c70]"
+            type="text"
+            placeholder="Search..."
+          />
+          <Button type="submit" className="p-2 bg-[#0f1c70] hover:bg-[#0a155d]  ">
+            <Search className="h-5 w-5 " />
           </Button>
+        </form>
+
+        {/* User list */}
+        <div className="mt-4 space-y-4">
+          <Allusers />
         </div>
+      </div>
+
+      {/* Logout button at the bottom */}
+      <div className="pt-4 border-t border-gray-700 mt-4">
+        <Button onClick={logouthandler} className="w-full bg-[#0f1c70] hover:bg-[#0a155d] flex items-center justify-center">
+          <LogOut className="mr-2" />
+         
+        </Button>
       </div>
     </div>
   );

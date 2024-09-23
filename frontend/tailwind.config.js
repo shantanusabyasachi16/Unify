@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette");
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   darkMode: ["class"],
@@ -7,7 +9,7 @@ module.exports = {
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}', 
+    './src/**/*.{js,jsx,ts,tsx}', // Include TypeScript files
   ],
   theme: {
     container: {
@@ -52,6 +54,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Add more colors if needed
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -59,7 +62,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       animation: {
-        aurora: "aurora 60s linear infinite", // Adding aurora animation
+        aurora: "aurora 60s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
@@ -80,7 +83,7 @@ module.exports = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"), // Animations plugin
+    require("tailwindcss-animate"),
     require('daisyui'), // DaisyUI for additional components
     addVariablesForColors, // Custom plugin to add CSS variables for colors
   ],

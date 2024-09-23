@@ -36,32 +36,32 @@ const SendInput = () => {
 
   return (
     <div className="relative w-full">
-      <form onSubmit={onSubmitHandler} className="px-4 py-2 w-full flex items-center bg-gray-600">
+      <form onSubmit={onSubmitHandler} className="px-4 py-2 w-full flex items-center bg-[#05120d]">
         <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Send a message..."
-          className="border text-sm rounded-lg flex-grow p-3 border-zinc-500 bg-gray-600 text-white focus:outline-none md:text-base"
+          className="border text-sm rounded-lg flex-grow p-3 border-zinc-500 bg-[#05120d] text-white focus:outline-none md:text-base"
         />
         <Button
           type="button"
           onClick={() => setShowEmojiPicker(!showEmojiPicker)} 
-          className="ml-2 text-sm text-white bg-gray-700 px-3 py-2 rounded-lg md:px-4"
+          className="ml-2 text-sm text-white bg-[#05120d] hover:bg-[#05120d] px-3 py-2 rounded-lg md:px-4"
         >
           😊
         </Button>
         <Button
           type="submit"
-          className="ml-2 text-sm text-white bg-gray-700 px-3 py-2 rounded-lg md:px-4"
+          className="ml-2 text-sm text-white bg-[#05120d hover:bg-[#05120d] px-3 py-2 rounded-lg md:px-4"
         >
           Send
         </Button>
       </form>
 
-      {/* Emoji Picker - display conditionally */}
+      {/* Emoji Picker - display conditionally at the bottom of the viewport */}
       {showEmojiPicker && (
-        <div className="absolute bottom-16 right-4 md:bottom-20 z-50">
+        <div className="fixed bottom-0 right-0 mb-10 mr-4 z-50">
           <Picker
             onEmojiSelect={handleEmojiSelect}
             style={{ width: '100%', maxWidth: '300px' }}

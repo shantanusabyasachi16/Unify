@@ -1,30 +1,26 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import Singlemessage from "./Singlemessage";
+import useGetMessages from "@/hooks/useGetMessages";
+import { useSelector } from "react-redux";
+import useGetSocketMessage from "@/hooks/useGetSocketMessage";
+import { VortexDemo } from "@/Vortesdemo";
 
-const Singlemessage = ({ message }) => {
-  const messageRef = useRef(null); 
-const {userInfo,selectedUsers} = useSelector(store=>store.user)
-  useEffect(() => {
+const ChatContainer = () => {
+  useGetMessages();
+  useGetSocketMessage();
 
-    messageRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
+  const { messages } = useSelector((store) => store.message);
+  if (!messages) return null; // Ensure a valid return
 
   return (
-    <div ref={messageRef} className={`chat ${message?.senderId === userInfo?._id ? 'chat-end' : 'chat-start'}`}>
-      <div className="chat-image avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="User avatar"
-            src={message?.senderId === userInfo?._id ? userInfo?.profilePhoto  : selectedUsers?.profilePhoto } />
-        </div>
+    <VortexDemo>
+      <div className="absolute inset-0 px-4 flex flex-col overflow-auto bg-transparent">
+        {messages.map((message) => (
+          <Singlemessage key={message._id} message={message} />
+        ))}
       </div>
-      <div className="chat-header">
-        <time className="text-xs  opacity-90 text-black-900">12:45</time>
-      </div>
-      <div className="chat-bubble">{message?.message}</div>
-      <div className="chat-footer opacity-50"></div>
-    </div>
+    </VortexDemo>
   );
 };
 
-export default Singlemessage;
+export default ChatContainer;

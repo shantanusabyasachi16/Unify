@@ -18,7 +18,7 @@ const User = (props) => {
     <>
       <div
         onClick={UserHandler}
-        className={`flex gap-2 items-center text-white hover:text-zinc-900 hover:bg-zinc-200 rounded p-2 cursor-pointer ${selectedUsers?._id === user?._id ? 'bg-zinc-200 text-black' : ''}`}
+        className={`flex gap-2 items-center text-white hover:text-black hover:bg-[#0f1c70] rounded-full p-2 cursor-pointer ${selectedUsers?._id === user?._id ? 'bg-[#0f1c70] text-white' : ''}`}
       >
         <div className={`avatar ${online ? 'online' : ''}`}>
           <div className="w-12 h-12 rounded-full overflow-hidden">
@@ -30,7 +30,7 @@ const User = (props) => {
           </div>
         </div>
         <div className="flex flex-col flex-1">
-          <div className="flex justify-between gap-2">
+          <div className="flex justify-between gap-2 ">
             <p>{user?.fullName}</p>
           </div>
         </div>
