@@ -3,8 +3,7 @@ import Singlemessage from "./Singlemessage";
 import useGetMessages from "@/hooks/useGetMessages";
 import { useSelector } from "react-redux";
 import useGetSocketMessage from "@/hooks/useGetSocketMessage";
-//import { BackgroundBeamsDemo } from "@/Beams";
-import { VortexDemo } from "@/Vortesdemo";
+import { BackgroundBeamsDemo } from "@/Beams";
 
 const ChatContainer = () => {
   useGetMessages();
@@ -14,13 +13,13 @@ const ChatContainer = () => {
   if (!messages) return null; // Ensure a valid return
 
   return (
-    <VortexDemo>
+    <BackgroundBeamsDemo>
       <div className="px-4 flex-1 overflow-auto bg-transparent">
         {messages.map((message) => (
           <Singlemessage key={message._id} message={message} />
         ))}
       </div>
-    </VortexDemo>
+    </BackgroundBeamsDemo>
   );
 };
 
