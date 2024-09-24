@@ -9,6 +9,15 @@ const Singlemessage = ({ message }) => {
     messageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+  // Function to format the message time dynamically
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    return formattedTime;
+  };
+
   return (
     <div
       ref={messageRef}
@@ -23,9 +32,16 @@ const Singlemessage = ({ message }) => {
         </div>
       </div>
       <div className="chat-header">
-        <time className="text-xs opacity-90 text-black-900">12:45</time>
+        {/* Dynamically show the time when the message was sent */}
+        <time className="text-xs  text-white">
+          {formatTime(message?.createdAt)} {/*reated at is timestamp*/}
+        </time>
       </div>
-      <div className="chat-bubble">{message?.message}</div>
+      <div
+        className={`chat-bubble ${message?.senderId === userInfo?._id ? 'bg-purple-400 text-black' : 'bg-pink-200 text-black'}`}
+      >
+        {message?.message}
+      </div>
       <div className="chat-footer opacity-50"></div>
     </div>
   );

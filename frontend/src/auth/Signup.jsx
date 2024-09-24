@@ -66,7 +66,7 @@ const Signup = () => {
                   name="fullName"
                   placeholder="  Enter your fullname"
                   required
-                  className="text-sm rounded-full text-black"
+                  className="text-md rounded-full text-black bg-purple-300 "
                 />
               </div>
               <div>
@@ -81,7 +81,7 @@ const Signup = () => {
                   }
                   placeholder="Enter a username"
                   required
-                  className="text-sm rounded-full text-black"
+                  className="text-md rounded-full text-black bg-purple-300 "
                 />
               </div>
             </div>
@@ -96,7 +96,7 @@ const Signup = () => {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter a password"
                 required
-                className="text-sm rounded-full text-black"
+                className="text-md rounded-full text-black bg-purple-300 "
               />
             </div>
             <div>
@@ -115,12 +115,12 @@ const Signup = () => {
                 }
                 placeholder="Confirm your password"
                 required
-                className="text-sm rounded-full text-black"
+                className="text-md rounded-full text-black bg-purple-300 "
               />
             </div>
             <div>
               <Label className="text-gray-100 text-lg">Gender</Label>
-              <RadioGroup className="flex items-center gap-5 my-2">
+              <RadioGroup className="flex items-center gap-5 my-2 ">
                 <div className="flex items-center space-x-2">
                   <Input
                     type="radio"
@@ -130,11 +130,11 @@ const Signup = () => {
                       setUser({ ...user, gender: e.target.value })
                     }
                     checked={user.gender === "male"}
-                    className="cursor-pointer"
+                    className="cursor-pointer "
                   />
                   <Label htmlFor="r1">Male</Label>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 ">
                   <Input
                     type="radio"
                     name="gender"

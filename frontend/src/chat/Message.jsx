@@ -28,7 +28,7 @@ const Message = () => {
           </div>
         </div>
         <div className="flex flex-col flex-1">
-          <p>{selectedUsers?.fullName}</p>
+          <p className='font-bold text-xl font-Josefin Sans'>{selectedUsers?.fullName}</p>
         </div>
       </div>
       <ChatContainer />

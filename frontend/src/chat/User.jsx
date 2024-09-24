@@ -29,9 +29,9 @@ const User = (props) => {
             />
           </div>
         </div>
-        <div className="flex flex-col flex-1">
-          <div className="flex justify-between gap-2 ">
-            <p>{user?.fullName}</p>
+        <div className="flex flex-col flex-1 ">
+          <div className="flex justify-between gap-2  ">
+            <p className=" text-xl font-Josefin Sans">{user?.fullName}</p>
           </div>
         </div>
       </div>

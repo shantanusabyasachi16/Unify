@@ -16,7 +16,7 @@ export function AuroraBackgroundDemo({ children }) {
         }}
         className="relative flex flex-col gap-4 items-center justify-center w-full h-full px-4"
       >
-        {children} {/* The login form will be passed here */}
+        {children} 
       </motion.div>
     </AuroraBackground>
   );

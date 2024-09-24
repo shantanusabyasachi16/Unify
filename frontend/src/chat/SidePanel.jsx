@@ -39,10 +39,7 @@ const SidePanel = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#000000] via-[#1e0a3a] to-[#000000]
-
-
- text-white h-full flex flex-col justify-between">
+    <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#000000] via-[#1e0a3a] to-[#000000] text-white h-full flex flex-col justify-between">
      
       <div>
         {/* Search form */}

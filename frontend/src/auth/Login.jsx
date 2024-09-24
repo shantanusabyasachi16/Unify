@@ -51,7 +51,7 @@ const Login = () => {
                 placeholder="Enter your username"
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
                 required
-                className="text-sm rounded-full text-black "
+                className="text-md rounded-full text-black bg-purple-300 "
               />
             </div>
             <div>
@@ -65,7 +65,7 @@ const Login = () => {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Enter your password"
                 required
-                className="text-sm rounded-full text-black"
+                className="text-md rounded-full text-black bg-purple-300 "
               />
             </div>
             <div className="flex justify-center">

@@ -43,7 +43,7 @@ const SendInput = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
-          className="flex-grow p-2 text-sm md:text-base text-white bg-gradient-to-r from-[#1e0a3a] via-[#3a1d70] to-[#1e0a3a] rounded-full   "
+          className="flex-grow p-2 text-sm md:text-base text-white bg-gradient-to-r from-[#1e0a3a] via-[#3a1d70] to-[#1e0a3a] rounded-full font-Josefin Sans   "
         />
         <div className="relative">
           <Button
