@@ -39,7 +39,10 @@ const SidePanel = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-[#040938] text-white h-full flex flex-col justify-between">
+    <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#000000] via-[#1e0a3a] to-[#000000]
+
+
+ text-white h-full flex flex-col justify-between">
      
       <div>
         {/* Search form */}
@@ -47,11 +50,11 @@ const SidePanel = () => {
           <input
             value={find}
             onChange={(e) => setFind(e.target.value)}
-            className="input input-bordered rounded-full flex-grow h-10 px-4 text-white bg-[#0f1c70]"
+            className="input input-bordered rounded-full flex-grow h-10 px-4 text-white bg-[#3a1d70]  hover:bg-[#1e0a3a] transition duration-200 ease-in-out"
             type="text"
             placeholder="Search..."
           />
-          <Button type="submit" className="p-2 bg-[#0f1c70] hover:bg-[#0a155d]  ">
+          <Button type="submit" className="p-2 bg-[#3a1d70] text-white hover:bg-[#1e0a3a] transition duration-200 ease-in-out rounded-full ">
             <Search className="h-5 w-5 " />
           </Button>
         </form>
@@ -64,7 +67,7 @@ const SidePanel = () => {
 
       {/* Logout button at the bottom */}
       <div className="pt-4 border-t border-gray-700 mt-4">
-        <Button onClick={logouthandler} className="w-full bg-[#0f1c70] hover:bg-[#0a155d] flex items-center justify-center">
+        <Button onClick={logouthandler} className="w-full bg-[#3a1d70] hover:bg-[#1e0a3a] transition duration-200 ease-in-out flex items-center justify-center">
           <LogOut className="mr-2" />
          
         </Button>

@@ -6,6 +6,7 @@ import { MESSAGE_API } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessages } from "@/redux/Messageslice";
 import Picker from '@emoji-mart/react'; 
+import { Send } from "lucide-react";
 
 const SendInput = () => {
   const [input, setInput] = useState(''); 
@@ -36,40 +37,42 @@ const SendInput = () => {
 
   return (
     <div className="relative w-full">
-      <form onSubmit={onSubmitHandler} className="px-4 py-2 w-full flex items-center bg-[#05120d]">
+      <form onSubmit={onSubmitHandler} className="flex items-center gap-3 w-full p-3 bg-gradient-to-r from-[#1e0a3a] via-[#3a1d70] to-[#1e0a3a]">
         <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Send a message..."
-          className="border text-sm rounded-lg flex-grow p-3 border-zinc-500 bg-[#05120d] text-white focus:outline-none md:text-base"
+          placeholder="Type a message..."
+          className="flex-grow p-2 text-sm md:text-base text-white bg-gradient-to-r from-[#1e0a3a] via-[#3a1d70] to-[#1e0a3a] rounded-full   "
         />
-        <Button
-          type="button"
-          onClick={() => setShowEmojiPicker(!showEmojiPicker)} 
-          className="ml-2 text-sm text-white bg-[#05120d] hover:bg-[#05120d] px-3 py-2 rounded-lg md:px-4"
-        >
-          😊
-        </Button>
+        <div className="relative">
+          <Button
+            type="button"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)} 
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#3a1d70] text-white hover:bg-[#1e0a3a] transition duration-200 ease-in-out"
+          >
+            😊
+          </Button>
+          {showEmojiPicker && (
+            <div className="absolute bottom-12 right-0">
+              <Picker
+                onEmojiSelect={handleEmojiSelect}
+                theme="dark"
+                emojiSize={22}
+              />
+            </div>
+          )}
+        </div>
         <Button
           type="submit"
-          className="ml-2 text-sm text-white bg-[#05120d hover:bg-[#05120d] px-3 py-2 rounded-lg md:px-4"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#3a1d70] text-white hover:bg-[#1e0a3a] transition duration-200 ease-in-out"
         >
-          Send
+          <Send size={20} />
         </Button>
       </form>
-
-      {/* Emoji Picker - display conditionally at the bottom of the viewport */}
-      {showEmojiPicker && (
-        <div className="fixed bottom-0 right-0 mb-10 mr-4 z-50">
-          <Picker
-            onEmojiSelect={handleEmojiSelect}
-            style={{ width: '100%', maxWidth: '300px' }}
-          />
-        </div>
-      )}
     </div>
   );
 };
 
 export default SendInput;
+

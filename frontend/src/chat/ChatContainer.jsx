@@ -14,7 +14,7 @@ const ChatContainer = () => {
 
   return (
     <BackgroundBeamsDemo>
-      <div className="px-4 flex-1 overflow-auto bg-transparent">
+      <div className="px-4 flex-1 overflow-auto bg-transparent ">
         {messages.map((message) => (
           <Singlemessage key={message._id} message={message} />
         ))}

@@ -16,7 +16,8 @@ const Message = () => {
     {
       selectedUsers != null ?(
 <div className="flex flex-col h-full">
-      <div className="flex gap-2 items-center bg-[#010604] text-white px-4 py-2">
+      <div className="flex gap-2 items-center bg-gradient-to-r from-[#1e0a3a] via-[#3a1d70] to-[#1e0a3a] text-white px-4 py-2"
+      >
       <div className={`avatar ${online ? 'online' : ''}`}>
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <img 
