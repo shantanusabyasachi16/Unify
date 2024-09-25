@@ -38,7 +38,7 @@ const Singlemessage = ({ message }) => {
         </time>
       </div>
       <div
-        className={`chat-bubble ${message?.senderId === userInfo?._id ? 'bg-purple-400 text-black' : 'bg-pink-200 text-black'}`}
+        className={`chat-bubble ${message?.senderId === userInfo?._id ? 'bg-purple-400 text-black' : 'bg-pink-200 text-black '}`}
       >
         {message?.message}
       </div>
